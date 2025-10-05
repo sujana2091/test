@@ -4,6 +4,7 @@ from typing import List
 from fastapi.middleware.cors import CORSMiddleware
 import numpy as np
 import json
+from mangum import Mangum
 
 class MetricsRequest(BaseModel):
     regions: List[str]
@@ -54,3 +55,5 @@ async def compute_metrics(payload: MetricsRequest):
         }
 
     return results
+
+handler = Mangum(app)
