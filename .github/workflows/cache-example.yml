@@ -1,0 +1,43 @@
+name: CI with Caching
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Cache Python dependencies
+        id: cache-step
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/pip
+          key: cache-da2f95f
+
+      - name: prime-cache-da2f95f
+        run: |
+          if [ "${{ steps.cache-step.outputs.cache-hit }}" == 'true' ]; then
+            echo "✅ Cache HIT for key: cache-da2f95f"
+          else
+            echo "🚫 Cache MISS for key: cache-da2f95f"
+          fi
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run tests
+        run: |
+          pytest
