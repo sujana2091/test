@@ -12,5 +12,5 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Say hello
+      - name: 24f2005095@ds.study.iitm.ac.in
         run: echo "Hello, world!"
