@@ -1,5 +1,16 @@
+name: Example Workflow
+
+on:
+  push:
+    branches:
+      - main
+
 jobs:
-  test:
+  say-hello:
+    runs-on: ubuntu-latest
     steps:
-      - name: 24f2005095@ds.study.iitm.ac.in
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Say hello
         run: echo "Hello, world!"
